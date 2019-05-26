@@ -77,6 +77,3 @@
 	path = Sming/Libraries/DHTesp
 	url = https://github.com/beegee-tokyo/DHTesp.git
 	ignore = dirty
-[submodule "Sming/Libraries/IR/lib/googletest"]
-	path = Sming/Libraries/IR/lib/googletest
-	url = https://github.com/google/googletest.git

@@ -1,0 +1,19 @@
+# generate linker script and flash script based on the size 
+
+set(IMAGE_BOOT_TEMP @IMAGE_BOOT_TEMP@)
+set(FLASH_SCRIPT @FLASH_SCRIPT@)
+set(LINKER_SCRIPT_TEMPLATE @LINKER_SCRIPT_TEMPLATE@)
+set(LINKER_SCRIPT @LINKER_SCRIPT@)
+
+# get size of stage-1 main image
+file(SIZE "${IMAGE_BOOT_TEMP}" IMAGE_BOOT_TEMP_SIZE)
+
+# calculate offset and size of IROM0 section
+math(EXPR IMAGE_IROM_OFFSET "(${IMAGE_BOOT_TEMP_SIZE} + 0x1000) & 0xFFFFF000" OUTPUT_FORMAT HEXADECIMAL)
+math(EXPR IROM0_ORG "0x40200000 + ${IMAGE_IROM_OFFSET}" OUTPUT_FORMAT HEXADECIMAL)
+set(IROM0_SIZE "1M - ${IMAGE_IROM_OFFSET}") # TODO: leave some room for system parameters area, spiffs, etc.
+
+# create linker script from template
+configure_file("${LINKER_SCRIPT_TEMPLATE}" "${LINKER_SCRIPT}" @ONLY)
+# create final flash script from preconfigured flash script
+configure_file("${FLASH_SCRIPT}.in" "${FLASH_SCRIPT}" @ONLY)

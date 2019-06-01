@@ -1,0 +1,37 @@
+# script for flash/prog targets for standalone images
+# Arguments (passed via command line to cmake using '-D' option)
+# - SPIFF_ROM: (optional) full path to prepared spiffs rom binary
+
+set(ESPTOOL @ESPTOOL@)
+set(COM_PORT @COM_PORT@)
+set(COM_SPEED @COM_SPEED_ESPTOOL@)
+set(flashimageoptions @flashimageoptions@)
+set(IMAGE_BOOT @IMAGE_BOOT@)
+set(IMAGE_IROM @IMAGE_IROM@)
+set(IMAGE_IROM_OFFSET @IMAGE_IROM_OFFSET@)
+
+set(FLASH_COMMAND "${ESPTOOL}" -p ${COM_PORT} -b ${COM_SPEED} write_flash ${flashimageoptions} 0x00000 "${IMAGE_BOOT}" ${IMAGE_IROM_OFFSET} "${IMAGE_IROM}")
+if (NOT "${SPIFF_ROM}" STREQUAL "")
+    # calculate SPIFFS offset
+    file(SIZE "${IMAGE_IROM}" IMAGE_IROM_SIZE)
+    math(EXPR SPIFF_START_OFFSET "(${IMAGE_IROM_SIZE} + 0x1000 + ${IMAGE_IROM_OFFSET}) & 0xFFFFF000" OUTPUT_FORMAT HEXADECIMAL)    
+
+    list(APPEND FLASH_COMMAND ${SPIFF_START_OFFSET} "${SPIFF_ROM}")
+endif()
+
+# for debugging
+#list(JOIN FLASH_COMMAND " " FLASH_COMMAND_LINE)
+#message("${FLASH_COMMAND_LINE}")
+
+# flash device
+execute_process(
+    COMMAND ${FLASH_COMMAND}
+    RESULT_VARIABLE res
+)
+
+# Propagate error
+if (NOT res EQUAL 0)
+    message(FATAL_ERROR "Flash command failed")
+endif()
+
+

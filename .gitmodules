@@ -113,3 +113,6 @@
 	path = Sming/Libraries/MCP_CAN_lib
 	url = https://github.com/coryjfowler/MCP_CAN_lib.git
 	ignore = dirty
+[submodule "Sming/Arch/Esp8266/Components/libsodium/libsodium"]
+	path = Sming/Arch/Esp8266/Components/libsodium/libsodium
+	url = https://github.com/jedisct1/libsodium.git

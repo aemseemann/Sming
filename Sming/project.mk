@@ -50,6 +50,8 @@ RELINK_VARS		:=
 # but whose values are cached.
 CACHE_VARS		:=
 
+CACHE_VARS += PYTHON2 
+
 # Use PROJECT_DIR to identify the project source directory, from where this makefile must be included
 CONFIG_VARS			+= PROJECT_DIR
 PROJECT_DIR			:= $(CURDIR)

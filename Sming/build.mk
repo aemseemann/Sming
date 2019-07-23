@@ -84,6 +84,8 @@ GIT ?= git
 # CMake command
 CMAKE ?= cmake
 
+# several scripts depend on python2
+PYTHON2 ?= python
 
 V ?= $(VERBOSE)
 ifeq ("$(V)","1")

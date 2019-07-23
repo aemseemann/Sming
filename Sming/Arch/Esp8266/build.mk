@@ -61,4 +61,4 @@ ifneq ($(MFORCE32),)
 endif
 
 # => Tools
-MEMANALYZER = python $(ARCH_TOOLS)/memanalyzer.py $(OBJDUMP)$(TOOL_EXT)
+MEMANALYZER = $(PYTHON2) $(ARCH_TOOLS)/memanalyzer.py $(OBJDUMP)$(TOOL_EXT)

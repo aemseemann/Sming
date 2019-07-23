@@ -12,7 +12,7 @@ COMPONENT_SRCDIRS += app
 # ARDUINO_LIBRARIES :=
 
 ## List the names of any additional Components required for this project
-# COMPONENT_DEPENDS :=
+COMPONENT_DEPENDS := libsodium
 
 ## Set paths for any GIT submodules your application uses
 # COMPONENT_SUBMODULES :=

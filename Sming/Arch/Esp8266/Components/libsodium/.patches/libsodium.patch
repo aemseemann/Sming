@@ -1,0 +1,1963 @@
+diff --git a/configure b/configure
+index 6063204a..c67f28dd 100755
+--- a/configure
++++ b/configure
+@@ -1965,8 +1965,9 @@ char $2 ();
+ choke me
+ #endif
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return $2 ();
+   ;
+@@ -2004,8 +2005,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ $4
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ if (sizeof ($2))
+ 	 return 0;
+@@ -2017,8 +2019,9 @@ if ac_fn_c_try_compile "$LINENO"; then :
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ $4
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ if (sizeof (($2)))
+ 	    return 0;
+@@ -3720,8 +3723,9 @@ done
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -3860,8 +3864,9 @@ ac_exeext=$EXEEXT
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <stdio.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ FILE *f = fopen ("conftest.out", "w");
+  return ferror (f) || fclose (f) != 0;
+@@ -3924,8 +3929,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -3975,8 +3981,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ #ifndef __GNUC__
+        choke me
+@@ -4016,8 +4023,9 @@ else
+    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -4031,8 +4039,9 @@ else
+       cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -4047,8 +4056,9 @@ else
+ 	 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -4133,8 +4143,9 @@ struct s2 {int (*f) (double a);};
+ int pairnames (int, char **, FILE *(*)(struct buf *, struct stat *, int), int, int);
+ int argc;
+ char **argv;
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return f (e, argv, 0) != argv[0]  ||  f (e, argv, 1) != argv[1];
+   ;
+@@ -4191,8 +4202,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -4379,10 +4391,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -4866,8 +4879,9 @@ $as_echo_n "checking for pthread_join using $CC $PTHREAD_CFLAGS $PTHREAD_LIBS...
+ extern "C"
+ #endif
+ char pthread_join ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return pthread_join ();
+   ;
+@@ -5238,8 +5252,9 @@ $as_echo_n "checking for the pthreads library -l$ax_pthread_try_flag... " >&6; }
+ #                       endif
+                         static void routine(void *a) { a = 0; }
+                         static void *start_routine(void *a) { return a; }
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ pthread_t th; pthread_attr_t attr;
+                         pthread_create(&th, 0, start_routine, 0);
+@@ -5289,8 +5304,9 @@ else
+                  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <pthread.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ int attr = $ax_pthread_attr; return attr /* ; */
+   ;
+@@ -5348,8 +5364,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <pthread.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ int i = PTHREAD_PRIO_INHERIT;
+   ;
+@@ -5458,8 +5475,9 @@ if test "x$ax_pthread_ok" = "xyes"; then
+ 
+         #include <pthread.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+         pthread_mutex_t mutex;
+@@ -5544,8 +5562,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char ct_poison ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return ct_poison ();
+   ;
+@@ -5593,10 +5612,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5626,10 +5646,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5665,10 +5686,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5744,10 +5766,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5780,10 +5803,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5816,10 +5840,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5852,10 +5877,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -5888,10 +5914,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -6437,8 +6464,9 @@ test_varargs (const char *format, ...)
+   va_end (args);
+ }
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   // Check bool.
+@@ -6656,8 +6684,9 @@ else
+ #include <string.h>
+ #include <float.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -6726,8 +6755,9 @@ else
+ #endif
+ 
+ #define XOR(e, f) (((e) && !(f)) || (!(e) && (f)))
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+   int i;
+   for (i = 0; i < 256; i++)
+@@ -6805,8 +6835,9 @@ else
+ 
+ #         define __EXTENSIONS__ 1
+           $ac_includes_default
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -6843,8 +6874,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ static int x; char a[++x]; a[sizeof a - 1] = 0; return a[0];
+   ;
+@@ -6876,8 +6908,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   #ifdef __wasi__
+@@ -6912,8 +6945,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   #ifdef _FORTIFY_SOURCE
+@@ -6950,10 +6984,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -6989,10 +7024,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7031,10 +7067,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7072,10 +7109,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7104,10 +7142,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7151,10 +7190,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7187,10 +7227,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7221,10 +7262,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7279,10 +7321,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7344,10 +7387,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7380,10 +7424,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7416,10 +7461,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7460,10 +7506,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7511,10 +7558,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7543,10 +7591,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7595,10 +7644,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7633,10 +7683,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7665,8 +7716,9 @@ $as_echo_n "checking for clang... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ #ifndef __clang__
+@@ -7692,10 +7744,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7738,10 +7791,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7776,10 +7830,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7814,10 +7869,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7852,10 +7908,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7890,10 +7947,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7928,10 +7986,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -7966,10 +8025,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8004,10 +8064,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8042,10 +8103,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8080,10 +8142,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8118,10 +8181,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8156,10 +8220,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8194,10 +8259,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8232,10 +8298,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8270,10 +8337,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8308,10 +8376,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8346,10 +8415,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8384,10 +8454,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8422,10 +8493,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8460,10 +8532,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8498,10 +8571,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8536,10 +8610,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8574,10 +8649,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8612,10 +8688,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8650,10 +8727,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8688,10 +8766,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8726,10 +8805,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8764,10 +8844,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8800,10 +8881,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8836,10 +8918,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -8881,8 +8964,9 @@ else
+ #include <stdlib.h>
+ static void sig(int _) { exit(0); }
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ volatile unsigned char * volatile x = (volatile unsigned char *) malloc(8);
+@@ -8964,8 +9048,9 @@ static void sigabrt_handler_1(int _)
+     exit(1);
+ }
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ signal(SIGABRT, sigabrt_handler_1);
+@@ -9021,8 +9106,9 @@ else
+                static  $ax_tls_keyword  int bar;
+                exit(1);
+                }
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -9063,10 +9149,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -10586,8 +10673,9 @@ else
+    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -11533,8 +11621,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+      cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -12257,8 +12346,9 @@ else
+       cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -14131,8 +14221,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -14184,8 +14275,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -15641,8 +15733,9 @@ else
+     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -16095,8 +16188,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char dlopen ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return dlopen ();
+   ;
+@@ -16156,8 +16250,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char shl_load ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return shl_load ();
+   ;
+@@ -16199,8 +16294,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char dlopen ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return dlopen ();
+   ;
+@@ -16238,8 +16334,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char dlopen ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return dlopen ();
+   ;
+@@ -16277,8 +16374,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ extern "C"
+ #endif
+ char dld_link ();
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return dld_link ();
+   ;
+@@ -16807,10 +16905,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -16840,8 +16939,9 @@ $as_echo_n "checking for MMX instructions set... " >&6; }
+ #pragma GCC target("mmx")
+ #include <mmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m64 x = _mm_setzero_si64();
+   ;
+@@ -16865,10 +16965,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -16909,10 +17010,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -16945,8 +17047,9 @@ $as_echo_n "checking for SSE2 instructions set... " >&6; }
+ #endif
+ #include <emmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m128d x = _mm_setzero_pd();
+        __m128i z = _mm_srli_epi64(_mm_setzero_si128(), 26);
+@@ -16971,10 +17074,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17015,10 +17119,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17048,8 +17153,9 @@ $as_echo_n "checking for SSE3 instructions set... " >&6; }
+ #pragma GCC target("sse3")
+ #include <pmmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m128 x = _mm_addsub_ps(_mm_cvtpd_ps(_mm_setzero_pd()),
+                                 _mm_cvtpd_ps(_mm_setzero_pd()));
+@@ -17074,10 +17180,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17118,10 +17225,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17151,8 +17259,9 @@ $as_echo_n "checking for SSSE3 instructions set... " >&6; }
+ #pragma GCC target("ssse3")
+ #include <tmmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m64 x = _mm_abs_pi32(_m_from_int(0));
+   ;
+@@ -17176,10 +17285,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17220,10 +17330,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17253,8 +17364,9 @@ $as_echo_n "checking for SSE4.1 instructions set... " >&6; }
+ #pragma GCC target("sse4.1")
+ #include <smmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m128i x = _mm_minpos_epu16(_mm_setzero_si128());
+   ;
+@@ -17278,10 +17390,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17322,10 +17435,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17355,8 +17469,9 @@ $as_echo_n "checking for AVX instructions set... " >&6; }
+ #pragma GCC target("avx")
+ #include <immintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  _mm256_zeroall();
+   ;
+@@ -17380,10 +17495,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17424,10 +17540,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17457,8 +17574,9 @@ $as_echo_n "checking for AVX2 instructions set... " >&6; }
+ #pragma GCC target("avx2")
+ #include <immintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ __m256 x = _mm256_set1_ps(3.14);
+@@ -17486,10 +17604,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17519,8 +17638,9 @@ $as_echo_n "checking if _mm256_broadcastsi128_si256 is correctly defined... " >&
+ #pragma GCC target("avx2")
+ #include <immintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m256i y = _mm256_broadcastsi128_si256(_mm_setzero_si128());
+   ;
+@@ -17558,10 +17678,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17591,8 +17712,9 @@ $as_echo_n "checking for AVX512F instructions set... " >&6; }
+ #pragma GCC target("avx512f")
+ #include <immintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ 
+@@ -17632,10 +17754,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17672,10 +17795,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17715,10 +17839,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17751,10 +17876,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17785,8 +17911,9 @@ $as_echo_n "checking for AESNI instructions set and PCLMULQDQ... " >&6; }
+ #pragma GCC target("pclmul")
+ #include <wmmintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  __m128i x = _mm_aesimc_si128(_mm_setzero_si128());
+        __m128i y = _mm_clmulepi64_si128(_mm_setzero_si128(), _mm_setzero_si128(), 0);
+@@ -17811,10 +17938,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17847,10 +17975,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17892,10 +18021,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -17925,8 +18055,9 @@ $as_echo_n "checking for RDRAND... " >&6; }
+ #pragma GCC target("rdrnd")
+ #include <immintrin.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  unsigned long long x; _rdrand64_step(&x);
+   ;
+@@ -17950,10 +18081,11 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <time.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+-time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
++//time_t x; int fodder = 0; if (fodder > -1000 && time(&x)) return (int) x
+   ;
+   return 0;
+ }
+@@ -18017,8 +18149,9 @@ $as_echo_n "checking if _xgetbv() is available... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+  #include <intrin.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+  (void) _xgetbv(0)
+   ;
+@@ -18135,8 +18268,9 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ #include <sys/types.h>
+ 	     #include <sys/param.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ #if ! (defined BYTE_ORDER && defined BIG_ENDIAN \
+ 		     && defined LITTLE_ENDIAN && BYTE_ORDER && BIG_ENDIAN \
+@@ -18155,8 +18289,9 @@ if ac_fn_c_try_compile "$LINENO"; then :
+ #include <sys/types.h>
+ 		#include <sys/param.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ #if BYTE_ORDER != BIG_ENDIAN
+ 		 not big endian
+@@ -18181,8 +18316,9 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <limits.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ #if ! (defined _LITTLE_ENDIAN || defined _BIG_ENDIAN)
+ 	      bogus endian macros
+@@ -18198,8 +18334,9 @@ if ac_fn_c_try_compile "$LINENO"; then :
+ /* end confdefs.h.  */
+ #include <limits.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ #ifndef _BIG_ENDIAN
+ 		 not big endian
+@@ -18240,8 +18377,9 @@ short int ascii_mm[] =
+ 		}
+ 		extern int foo;
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ return use_ascii (foo) == use_ebcdic (foo);
+   ;
+@@ -18266,8 +18404,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ $ac_includes_default
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ 	     /* Are we little or big endian?  From Harbison&Steele.  */
+@@ -18322,8 +18461,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ #include <limits.h>
+ #include <stdint.h>
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ (void) SIZE_MAX;
+@@ -18350,8 +18490,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ int a = 42;
+@@ -18384,8 +18525,9 @@ $as_echo_n "checking whether we can use x86_64 asm code... " >&6; }
+ /* end confdefs.h.  */
+ 
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ #if defined(__amd64) || defined(__amd64__) || defined(__x86_64__)
+@@ -18441,8 +18583,9 @@ $as_echo_n "checking whether we can assemble AVX opcodes... " >&6; }
+ /* end confdefs.h.  */
+ 
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ #if defined(__amd64) || defined(__amd64__) || defined(__x86_64__)
+@@ -18514,8 +18657,9 @@ void fcontract(uint128_t *t) {
+   *t >>= 84;
+ }
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ (void) fcontract;
+@@ -18554,8 +18698,9 @@ $as_echo_n "checking for cpuid instruction... " >&6; }
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ unsigned int cpu_info[4];
+@@ -18592,8 +18737,9 @@ $as_echo_n "checking if the .private_extern asm directive is supported... " >&6;
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ __asm__ __volatile__ (".private_extern dummy_symbol \n"
+@@ -18625,8 +18771,9 @@ $as_echo_n "checking if the .hidden asm directive is supported... " >&6; }
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ __asm__ __volatile__ (".hidden dummy_symbol \n"
+@@ -18683,8 +18830,9 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ __attribute__((weak)) void __dummy(void *x) { }
+ void f(void *x) { __dummy(x); }
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ 
+@@ -18719,8 +18867,9 @@ case $host_cpu in #(
+ # error data alignment is required
+ #endif
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;
+@@ -18751,8 +18900,9 @@ $as_echo_n "checking if atomic operations are supported... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ static volatile int _sodium_lock;
+@@ -18799,8 +18949,9 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <alloca.h>
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ char *p = (char *) alloca (2 * sizeof (int));
+ 			  if (p) return 0;
+@@ -18852,8 +19003,9 @@ void *alloca (size_t);
+ # endif
+ #endif
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ char *p = (char *) alloca (1);
+ 				    if (p) return 0;
+@@ -18950,8 +19102,9 @@ find_stack_direction (int *addr, int depth)
+   return dir + dummy;
+ }
+ 
++void user_pre_init() { }
+ int
+-main (int argc, char **argv)
++user_init (int argc, char **argv)
+ {
+   return find_stack_direction (0, argc + !argv + 20) < 0;
+ }
+@@ -19015,8 +19168,9 @@ $as_echo_n "checking for getrandom with a standard API... " >&6; }
+ # include <sys/random.h>
+ #endif
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ unsigned char buf;
+@@ -19061,8 +19215,9 @@ $as_echo_n "checking for getentropy with a standard API... " >&6; }
+ # include <sys/random.h>
+ #endif
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+ #ifdef __APPLE__
+@@ -19468,8 +19623,9 @@ else
+        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++void user_pre_init() { }
+ int
+-main ()
++user_init ()
+ {
+ 
+   ;

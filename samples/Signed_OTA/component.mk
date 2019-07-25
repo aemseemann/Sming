@@ -68,6 +68,46 @@ SDK_BASE = $(SMING_HOME)
 BOARD_URL = esp8266.local
 
 # Reboot via HTTP request
+OTAGEN_SCRIPT = $(COMPONENT_PATH)/otagen.py
+OTA_GEN := $(PYTHON2) $(OTAGEN_SCRIPT)
+OTA_SIGNING_KEY := $(COMPONENT_PATH)/signing.key
+OTA_VERIFICATION_HEADER := $(COMPONENT_PATH)/app/ota_verification_key.h
+
+$(OTA_SIGNING_KEY):
+	@echo "#########################################################"
+	@echo "# Generating new signing key for OTA images             #"
+	@echo "#                                                       #"
+	@echo "# If this is not what you want, replace the generated   #"
+	@echo "# key without your own (e. g. from a previous project)  #"
+	@echo "# and run 'make' again.                                 #"
+	@echo "#########################################################"
+	$(Q) $(OTA_GEN) --genkey --keyfile=$@
+
+.PHONY: generate_ota_signing_key
+generate_ota_signing_key: 
+	@echo Generate a new OTA signing key on explicit request.
+	$(Q) $(OTA_GEN) --genkey --keyfile=$(OTA_SIGNING_KEY)
+
+$(OTA_VERIFICATION_HEADER): $(OTA_SIGNING_KEY) $(OTAGEN_SCRIPT)
+	$(Q) $(OTA_GEN) --keyfile=$< --pubkey-header=$@
+
+# add dependency to trigger automatic generation of verification key header
+$(COMPONENT_PATH)/app/application.cpp: $(OTA_VERIFICATION_HEADER)
+
+OTA_FILE := firmware.ota
+$(OTA_FILE): $(RBOOT_ROM_0_BIN) $(RBOOT_ROM_1_BIN) $(OTA_SIGNING_KEY)
+	@echo Generating OTA firmware update file...
+	$(Q) $(OTA_GEN) --keyfile=$(OTA_SIGNING_KEY) --out "$(OTA_FILE)" "$(ROM_0_ADDR)=$(RBOOT_ROM_0_BIN)" "$(RBOOT_ROM1_ADDR)=$(RBOOT_ROM_1_BIN)"
+
+BOARD_URL = esp8266.local
+
+.PHONY: otafile ota reboot
+
+otafile: $(OTA_FILE)
+
+ota: $(OTA_FILE) 
+	@curl --fail -H 'Expect:' -F fwimage=@$(OTA_FILE) http://$(BOARD_URL)/fwupgrade > /dev/null && curl http://$(BOARD_URL)/reboot > /dev/null
+
 reboot:
 	@curl http://$(BOARD_URL)/reboot
 

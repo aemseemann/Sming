@@ -8,7 +8,10 @@
 <body>
 <h2>ESP8266 OTA firmware update</h2>
 <p>
-To be implemented...
+<form action="/fwupgrade" method="post" enctype="multipart/form-data">
+<label>OTA update file: <input type="file" name="fwimage" size="50"/></label>
+<input type="submit" value="&#x2192; Go"/>
+</form>
 </p>
 <a href="ledcontrol.htm">Control LED</a>
 </body>

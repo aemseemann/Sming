@@ -22,3 +22,4 @@ $(TARGET_OUT_1): $(RBOOT_LD_1)
 
 # always update SPIFFS
 .PHONY: $(SPIFF_BIN_OUT)
+

@@ -19,6 +19,68 @@ index 0b43474..4c1913e 100644
  ifneq ($(RBOOT_EXTRA_INCDIR),)
  	CFLAGS += $(addprefix -I,$(RBOOT_EXTRA_INCDIR))
  endif
+diff --git a/appcode/rboot-api.c b/appcode/rboot-api.c
+index eb4d028..716dc89 100644
+--- a/appcode/rboot-api.c
++++ b/appcode/rboot-api.c
+@@ -43,7 +43,7 @@ rboot_config ICACHE_FLASH_ATTR rboot_get_config(void) {
+ // updates checksum automatically (if enabled)
+ bool ICACHE_FLASH_ATTR rboot_set_config(rboot_config *conf) {
+ 	uint8_t *buffer;
+-	buffer = (uint8_t*)pvPortMalloc(SECTOR_SIZE, 0, 0);
++	buffer = (uint8_t*)os_malloc(SECTOR_SIZE);
+ 	if (!buffer) {
+ 		//os_printf("No ram!\r\n");
+ 		return false;
+@@ -58,7 +58,7 @@ bool ICACHE_FLASH_ATTR rboot_set_config(rboot_config *conf) {
+ 	spi_flash_erase_sector(BOOT_CONFIG_SECTOR);
+ 	spi_flash_write(BOOT_CONFIG_SECTOR * SECTOR_SIZE, (uint32_t*)((void*)buffer), SECTOR_SIZE);
+ 	
+-	vPortFree(buffer, 0, 0);
++	os_free(buffer);
+ 	return true;
+ }
+ 
+@@ -103,7 +103,7 @@ bool ICACHE_FLASH_ATTR rboot_write_end(rboot_write_status *status) {
+ 
+ // function to do the actual writing to flash
+ // call repeatedly with more data (max len per write is the flash sector size (4k))
+-bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *data, uint16_t len) {
++bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, const uint8_t *data, uint16_t len) {
+ 	
+ 	bool ret = false;
+ 	uint8_t *buffer;
+@@ -114,7 +114,7 @@ bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *da
+ 	}
+ 	
+ 	// get a buffer
+-	buffer = (uint8_t *)pvPortMalloc(len + status->extra_count, 0, 0);
++	buffer = (uint8_t *)os_malloc(len + status->extra_count);
+ 	if (!buffer) {
+ 		//os_printf("No ram!\r\n");
+ 		return false;
+@@ -152,7 +152,7 @@ bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *da
+ 		}
+ 	//}
+ 
+-	vPortFree(buffer, 0, 0);
++	os_free(buffer);
+ 	return ret;
+ }
+ 
+diff --git a/appcode/rboot-api.h b/appcode/rboot-api.h
+index a98c209..ec4f0e5 100644
+--- a/appcode/rboot-api.h
++++ b/appcode/rboot-api.h
+@@ -93,7 +93,7 @@ bool ICACHE_FLASH_ATTR rboot_write_end(rboot_write_status *status);
+  *  of OTA data is received over the network.
+  *  @note   Call rboot_write_init before calling this function to get the rboot_write_status structure
+ */
+-bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *data, uint16_t len);
++bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, const uint8_t *data, uint16_t len);
+ 
+ #ifdef BOOT_RTC_ENABLED
+ /** @brief  Get rBoot status/control data from RTC data area
 diff --git a/rboot.c b/rboot.c
 index d622f97..00ccaeb 100644
 --- a/rboot.c
@@ -289,43 +351,3 @@ index d622f97..00ccaeb 100644
  	// copy the loader to top of iram
  	ets_memcpy((void*)_text_addr, _text_data, _text_len);
  	// return address to load from
- diff --git a/appcode/rboot-api.c b/appcode/rboot-api.c
-index eb4d028..fc00ce1 100644
---- a/appcode/rboot-api.c
-+++ b/appcode/rboot-api.c
-@@ -43,7 +43,7 @@ rboot_config ICACHE_FLASH_ATTR rboot_get_config(void) {
- // updates checksum automatically (if enabled)
- bool ICACHE_FLASH_ATTR rboot_set_config(rboot_config *conf) {
- 	uint8_t *buffer;
--	buffer = (uint8_t*)pvPortMalloc(SECTOR_SIZE, 0, 0);
-+	buffer = (uint8_t*)os_malloc(SECTOR_SIZE);
- 	if (!buffer) {
- 		//os_printf("No ram!\r\n");
- 		return false;
-@@ -58,7 +58,7 @@ bool ICACHE_FLASH_ATTR rboot_set_config(rboot_config *conf) {
- 	spi_flash_erase_sector(BOOT_CONFIG_SECTOR);
- 	spi_flash_write(BOOT_CONFIG_SECTOR * SECTOR_SIZE, (uint32_t*)((void*)buffer), SECTOR_SIZE);
- 	
--	vPortFree(buffer, 0, 0);
-+	os_free(buffer);
- 	return true;
- }
- 
-@@ -114,7 +114,7 @@ bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *da
- 	}
- 	
- 	// get a buffer
--	buffer = (uint8_t *)pvPortMalloc(len + status->extra_count, 0, 0);
-+	buffer = (uint8_t *)os_malloc(len + status->extra_count);
- 	if (!buffer) {
- 		//os_printf("No ram!\r\n");
- 		return false;
-@@ -152,7 +152,7 @@ bool ICACHE_FLASH_ATTR rboot_write_flash(rboot_write_status *status, uint8_t *da
- 		}
- 	//}
- 
--	vPortFree(buffer, 0, 0);
-+	os_free(buffer);
- 	return ret;
- }
-
